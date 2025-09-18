@@ -1,0 +1,459 @@
+/* Asosiy reset va font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f4f4f4;
+    transition: background 0.3s ease;
+    padding: 20px;
+  }
+  
+  body.dark-mode {
+    background: #1e1e1e;
+    color: #f4f4f4;
+  }
+  
+  .calculator {
+    width: 100%;
+    max-width: 360px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  body.dark-mode .calculator {
+    background: #2d2d2d;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Display (ekran) */
+  .display {
+    background: #f9f9f9;
+    padding: 20px;
+    text-align: right;
+    font-size: 2.5rem;
+    font-weight: 500;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: background 0.3s ease;
+  }
+  
+  body.dark-mode .display {
+    background: #3a3a3a;
+    color: white;
+  }
+  
+  /* Tugmalar gridi */
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  
+  button {
+    padding: 20px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.15s ease;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Operatorlar (maxsus rang) */
+  button:nth-child(3),
+  button:nth-child(4),
+  button:nth-child(8),
+  button:nth-child(12),
+  button:nth-child(16) {
+    background: #ff9500;
+    color: white;
+  }
+  
+  /* Tenglik tugmasi */
+  .equals {
+    background: #3b82f6 !important;
+    color: white !important;
+    grid-column: span 2;
+  }
+  
+  /* Nol tugmasi */
+  .zero {
+    grid-column: span 2;
+  }
+  
+  /* Toza tugmalar */
+  button:nth-child(1),
+  button:nth-child(2) {
+    background: #e0e0e0;
+    color: #555;
+  }
+  
+  /* Dark Mode effektlari */
+  body.dark-mode button {
+    background: #3a3a3a;
+    color: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  body.dark-mode button:hover {
+    background: #444;
+  }
+  
+  body.dark-mode button:active {
+    background: #555;
+  }
+  
+  body.dark-mode button:nth-child(3),
+  body.dark-mode button:nth-child(4),
+  body.dark-mode button:nth-child(8),
+  body.dark-mode button:nth-child(12),
+  body.dark-mode button:nth-child(16) {
+    background: #ff9500;
+  }
+  
+  body.dark-mode .equals {
+    background: #3b82f6 !important;
+  }
+  
+  /* Tarix bo‘limi */
+  /* Tarix elementlari */
+.history-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    color: #444;
+    transition: background 0.2s;
+  }
+  
+  .history-item:hover {
+    background: #f0f0f0;
+    border-radius: 6px;
+  }
+  
+  body.dark-mode .history-item {
+    border-bottom: 1px solid #444;
+    color: #ddd;
+  }
+  
+  body.dark-mode .history-item:hover {
+    background: #333;
+  }
+  
+  /* Scroll uchun */
+  .history {
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #333;
+  }
+  
+  .history::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .history::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .history::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 10px;
+  }
+  
+  body.dark-mode .history::-webkit-scrollbar-thumb {
+    background-color: #555;
+  }
+  
+  body.dark-mode .history {
+    background: #2a2a2a;
+    color: #ccc;
+  }
+
+  /* Modal oyna */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: modalFadeIn 0.3s ease;
+}
+
+body.dark-mode .modal-content {
+  background: #2d2d2d;
+  color: white;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555;
+  font-weight: bold;
+}
+
+body.dark-mode .close {
+  color: #ccc;
+}
+
+.modal-history-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 1rem;
+}
+
+body.dark-mode .modal-history-item {
+  border-bottom: 1px solid #444;
+  color: #ddd;
+}
+
+.empty-history {
+  font-style: italic;
+  color: #888;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.clear-history-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.clear-history-btn:hover {
+  background: #dc2626;
+}
+
+/* 5-qator tugmalari uchun */
+.buttons {
+  grid-template-rows: repeat(5, 1fr); /* 5 qator */
+}
+
+/* = tugmasi endi 1 katak */
+.equals {
+  grid-column: span 1 !important;
+  grid-row: span 1;
+}
+
+/* 0 tugmasi 2 katak */
+.zero {
+  grid-column: span 2 !important;
+}
+
+/* History tugmasi — 4-satr oxiri, 5-satrda = ostida */
+.history-btn {
+  background: #6366f1;
+  color: white;
+}
+
+/* Contact tugmasi */
+.contact-btn {
+    background: #10b981;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .contact-btn:hover {
+    background: #059669;
+  }
+  
+  /* Contact Modal */
+  #contactModal .modal-content {
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  body.dark-mode #contactModal .modal-content {
+    background: #2d2d2d;
+    color: white;
+  }
+  
+  /* Contact List */
+  .contact-list {
+    list-style: none;
+    margin-top: 20px;
+  }
+  
+  .contact-list li {
+    margin: 12px 0;
+  }
+  
+  .contact-list a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #3b82f6;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+    background: #f0f4ff;
+  }
+  
+  body.dark-mode .contact-list a {
+    background: #3a3a3a;
+    color: #60a5fa;
+  }
+  
+  .contact-list a:hover {
+    background: #dbeafe;
+    transform: translateX(5px);
+  }
+  
+  body.dark-mode .contact-list a:hover {
+    background: #444;
+  }
+  
+  /* Ikonkalar */
+  .contact-list i {
+    width: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  
+  /* Animatsiya (ixtiyoriy) */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  .contact-list li {
+    animation: slideIn 0.4s ease forwards;
+  }
+  
+  .contact-list li:nth-child(1) { animation-delay: 0.1s; }
+  .contact-list li:nth-child(2) { animation-delay: 0.2s; }
+  .contact-list li:nth-child(3) { animation-delay: 0.3s; }
+  .contact-list li:nth-child(4) { animation-delay: 0.4s; }
+  .contact-list li:nth-child(5) { animation-delay: 0.5s; }
+
+/* Dark mode uchun */
+body.dark-mode .history-btn {
+  background: #818cf8;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Responsive: kichik ekranlarda font kichraydi */
+@media (max-width: 360px) {
+  .modal-content {
+    margin: 10px;
+    padding: 20px;
+  }
+  .close {
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+  }
+}
+  
+  /* Dark Mode toggle (ixtiyoriy — keyin qo‘shsak bo‘ladi) */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Animatsiya: raqam paydo bo‘lishi */
+  .display {
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Mobil moslashuvchanlik */
+  @media (max-width: 400px) {
+    .calculator {
+      padding: 15px;
+    }
+  
+    .display {
+      font-size: 2rem;
+      padding: 15px;
+    }
+  
+    button {
+      padding: 18px;
+      font-size: 1.3rem;
+    }
+  }

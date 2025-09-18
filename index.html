@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sodiqov's Smart Calculator</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+        <!-- 1-qator -->
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="backspace()">←</button>
+        <button onclick="appendOperator('/')">÷</button>
+        <button onclick="appendOperator('*')">×</button>
+      
+        <!-- 2-qator -->
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="appendOperator('-')">−</button>
+      
+        <!-- 3-qator -->
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="appendOperator('+')">+</button>
+      
+        <!-- 4-qator -->
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="calculate()" class="equals">=</button>
+      
+        <!-- 5-qator -->
+        <button onclick="appendNumber('.')">.</button>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="showContactModal()" class="contact-btn">📞</button>
+        <button onclick="showHistoryModal()" class="history-btn">📜</button>
+      </div>
+      
+      <!-- Modal oyna -->
+      <div id="historyModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeHistoryModal()">&times;</span>
+          <h3>Last 10 actions</h3>
+          <div id="modalHistoryList"></div>
+          <button onclick="clearHistory()" class="clear-history-btn">Clear history</button>
+        </div>
+      </div>
+
+      <!-- Contact Modal -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeContactModal()">&times;</span>
+      <h2><i class="fas fa-user"></i> Contact Me</h2>
+      <ul class="contact-list">
+        <li><a href="mailto:asilxonsodiqov@gmail.com"><i class="fas fa-envelope"></i> Email</a></li>
+        <li><a href="https://t.me/Asilbek_Sodiqov" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
+        <li><a href="https://instagram.com/asilxon_sodiqov" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="https://x.com/Asilxon_Sodiqov" target="_blank"><i class="fab fa-twitter"></i> X (Twitter)</a></li>
+        <li><a href="tel:+998947030806"><i class="fas fa-phone"></i> Call +998 94 703 08 06</a></li>
+      </ul>
+      
+      <footer>
+        <p>&copy; 2025 Sodiqov's Smart Calculator. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="sw-register.js"></script>
+</body>
+</html>
